@@ -1,13 +1,11 @@
-package info.sergeikolinichenko.cryptorates.domain.pojo
+package info.sergeikolinichenko.cryptorates.domain.models
 
-import android.media.Rating
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-/** Created by Sergei Kolinichenko on 10.2022 at 15:13 (GMT+3) **/
+/** Created by Sergei Kolinichenko on 14.10.2022 at 15:13 (GMT+3) **/
 
 data class CoinInfo(
-
     @SerializedName("Id")
     @Expose
     val id: String? = null,
@@ -23,5 +21,4 @@ data class CoinInfo(
     @SerializedName("ImageUrl")
     @Expose
     val imageUrl: String? = null
-
 )
