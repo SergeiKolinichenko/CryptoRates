@@ -1,18 +1,35 @@
 package info.sergeikolinichenko.cryptorates.data.network
 
-import info.sergeikolinichenko.cryptorates.data.models.CoinInfoListDto
-import io.reactivex.Single
+import info.sergeikolinichenko.cryptorates.data.model.CryptoInfoJsonContainerDto
+import info.sergeikolinichenko.cryptorates.data.model.CryptoNamesListDto
 import retrofit2.http.GET
+import retrofit2.http.Query
 
-/** Created by Sergei Kolinichenko on 14.10.2022 at 21:07 (GMT+3) **/
+/** Created by Sergei Kolinichenko on 02.11.2022 at 17:02 (GMT+3) **/
 
 interface ApiService {
 
     @GET("top/totalvolfull")
-    fun getCoinsInfo(): Single<CoinInfoListDto>
+    fun getTopCryptoInfo(
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = "",
+        @Query(QUERY_PARAM_LIMIT) limit: Int = 10,
+        @Query(QUERY_PARAM_TO_SYMBOL) tSym: String = CURRENCY
+    ): CryptoNamesListDto
 
-    companion object{
+    @GET("pricemultifull")
+    fun getFullPriceList(
+        @Query(QUERY_PARAM_API_KEY) apiKey: String = "",
+        @Query(QUERY_PARAM_FROM_SYMBOLS) fSyms: String,
+        @Query(QUERY_PARAM_TO_SYMBOLS) tSyms: String = CURRENCY
+    ): CryptoInfoJsonContainerDto
+
+    companion object {
+        private const val QUERY_PARAM_API_KEY = "api_key"
         private const val QUERY_PARAM_LIMIT = "limit"
         private const val QUERY_PARAM_TO_SYMBOL = "tsym"
+        private const val QUERY_PARAM_TO_SYMBOLS = "tsyms"
+        private const val QUERY_PARAM_FROM_SYMBOLS = "fsyms"
+
+        private const val CURRENCY = "USD"
     }
 }

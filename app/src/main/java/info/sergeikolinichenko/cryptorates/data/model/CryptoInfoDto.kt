@@ -1,23 +1,26 @@
-package info.sergeikolinichenko.cryptorates.domain.models
+package info.sergeikolinichenko.cryptorates.data.model
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
+import info.sergeikolinichenko.cryptorates.data.network.ApiFactory.BASE_IMAGE_URL
+import info.sergeikolinichenko.cryptorates.utils.convertTimestampToTime
 
-/** Created by Sergei Kolinichenko on 14.10.2022 at 18:20 (GMT+3) **/
+/** Created by Sergei Kolinichenko on 14.10.2022 at 20:56 (GMT+3) **/
 
-data class CoinPriceInfo(
+data class CryptoInfoDto(
     @SerializedName("TYPE")
     @Expose
     val type: String?,
     @SerializedName("MARKET")
     @Expose
     val market: String?,
-    @PrimaryKey
+
     @SerializedName("FROMSYMBOL")
     @Expose
     val fromSymbol: String,
+
     @SerializedName("TOSYMBOL")
     @Expose
     val toSymbol: String?,
@@ -126,4 +129,12 @@ data class CoinPriceInfo(
     @SerializedName("IMAGEURL")
     @Expose
     val imageUrl: String?
-)
+) {
+    fun getFormattedTime(): String {
+        return convertTimestampToTime(lastUpdate)
+    }
+
+    fun getFullImageUrl(): String {
+        return BASE_IMAGE_URL + imageUrl
+    }
+}

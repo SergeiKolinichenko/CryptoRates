@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Crypto Rates</string>
+    <string name="price_label">Price:</string>
+    <string name="min_price_label">Minimum per day:</string>
+    <string name="max_price_label">Maximum per day:</string>
+    <string name="last_market_label">Last trade:</string>
+    <string name="last_updated_label">Updated:</string>
 </resources>
