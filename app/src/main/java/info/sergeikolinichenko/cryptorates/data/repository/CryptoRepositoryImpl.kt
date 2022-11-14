@@ -1,12 +1,14 @@
-package info.sergeikolinichenko.cryptorates.data
+package info.sergeikolinichenko.cryptorates.data.repository
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import info.sergeikolinichenko.cryptorates.data.database.AppDatabase
+import info.sergeikolinichenko.cryptorates.data.database.CryptoMapper
 import info.sergeikolinichenko.cryptorates.data.network.ApiFactory
 import info.sergeikolinichenko.cryptorates.domain.CryptoRepository
-import info.sergeikolinichenko.cryptorates.domain.models.CryptoInfo
+import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
 import kotlinx.coroutines.delay
 
 /** Created by Sergei Kolinichenko on 02.11.2022 at 19:45 (GMT+3) **/
@@ -36,12 +38,17 @@ class CryptoRepositoryImpl(application: Application): CryptoRepository {
 
     override suspend fun loadCryptoData() {
         while (true) {
-            val topCoins = apiService.getTopCryptoInfo(limit = LIMIT_TOP_COINS)
-            val fSyms = mapper.mapNamesListToString(topCoins)
-            val jsonContainer = apiService.getFullPriceList(fSyms = fSyms)
-            val coinInfoDtoList = mapper.mapJsonContainerToListCryptoInfo(jsonContainer)
-            val dbModelList = coinInfoDtoList.map { mapper.mapDtoToDbModel(it) }
-            cryptoInfoDao.insertPriceList(dbModelList)
+            try {
+                val topCoins = apiService.getTopCryptoInfo(limit = LIMIT_TOP_COINS)
+                val fSyms = mapper.mapNamesListToString(topCoins)
+                val jsonContainer = apiService.getFullPriceList(fSyms = fSyms)
+                val coinInfoDtoList = mapper.mapJsonContainerToListCryptoInfo(jsonContainer)
+                val dbModelList = coinInfoDtoList.map { mapper.mapDtoToDbModel(it) }
+                Log.d("MyLog", "dbModelList $dbModelList")
+                cryptoInfoDao.insertPriceList(dbModelList)
+            } catch (e: Exception) {
+                Log.d("MyLog", "Error loadCryptoData $e")
+            }
             delay(RECEIVE_DELAY_JSON)
         }
     }

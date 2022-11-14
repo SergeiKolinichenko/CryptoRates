@@ -1,4 +1,4 @@
-package info.sergeikolinichenko.cryptorates.data.model
+package info.sergeikolinichenko.cryptorates.data.models
 
 import com.google.gson.JsonObject
 import com.google.gson.annotations.Expose

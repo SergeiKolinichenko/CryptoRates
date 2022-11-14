@@ -1,11 +1,14 @@
-package info.sergeikolinichenko.cryptorates.data
+package info.sergeikolinichenko.cryptorates.data.database
 
+import android.util.Log
 import com.google.gson.Gson
-import info.sergeikolinichenko.cryptorates.data.database.CryptoInfoDbModel
-import info.sergeikolinichenko.cryptorates.data.model.CryptoInfoDto
-import info.sergeikolinichenko.cryptorates.data.model.CryptoInfoJsonContainerDto
-import info.sergeikolinichenko.cryptorates.data.model.CryptoNamesListDto
-import info.sergeikolinichenko.cryptorates.domain.models.CryptoInfo
+import info.sergeikolinichenko.cryptorates.data.models.CryptoInfoDto
+import info.sergeikolinichenko.cryptorates.data.models.CryptoInfoJsonContainerDto
+import info.sergeikolinichenko.cryptorates.data.models.CryptoNamesListDto
+import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 
 /** Created by Sergei Kolinichenko on 02.11.2022 at 20:30 (GMT+3) **/
 
@@ -19,14 +22,14 @@ class CryptoMapper {
         highDay = dto.highDay,
         lowDay = dto.lowDay,
         lastMarket = dto.lastMarket,
-        imageUrl = dto.imageUrl
+        imageUrl = BASE_IMAGE_URL + dto.imageUrl
     )
 
     fun mapDbModelToEntity(dbModel: CryptoInfoDbModel) = CryptoInfo(
         fromSymbol = dbModel.fromSymbol,
         toSymbol = dbModel.toSymbol,
         price = dbModel.price,
-        lastUpdate = dbModel.lastUpdate,
+        lastUpdate = convertTimestampToTime(dbModel.lastUpdate),
         highDay = dbModel.highDay,
         lowDay = dbModel.lowDay,
         lastMarket = dbModel.lastMarket,
@@ -54,13 +57,24 @@ class CryptoMapper {
         return result
     }
 
-    fun mapNamesListToString(nameListDto: CryptoNamesListDto): String {
-        return nameListDto.names?.map {
+    fun mapNamesListToString(namesListDto: CryptoNamesListDto): String {
+        return namesListDto.names?.map {
             it.cryptoName?.name
-        }?.joinToString { SEPARATOR } ?: EMPTY_STRING
+        }?.joinToString(SEPARATOR) ?: EMPTY_STRING
+    }
+
+    private fun convertTimestampToTime(timestamp: Long?): String {
+        if (timestamp == null) return ""
+        val stamp = Timestamp(timestamp * 1000)
+        val date = Date(stamp.time)
+        val pattern = "HH:mm:ss"
+        val sdf = SimpleDateFormat(pattern, Locale.getDefault())
+        sdf.timeZone = TimeZone.getDefault()
+        return sdf.format(date)
     }
 
     companion object {
+        const val BASE_IMAGE_URL = "https://cryptocompare.com"
         const val SEPARATOR = ","
         const val EMPTY_STRING = ""
     }

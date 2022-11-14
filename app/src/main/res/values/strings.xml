@@ -5,4 +5,5 @@
     <string name="max_price_label">Maximum per day:</string>
     <string name="last_market_label">Last trade:</string>
     <string name="last_updated_label">Updated:</string>
+    <string name="slash">/</string>
 </resources>

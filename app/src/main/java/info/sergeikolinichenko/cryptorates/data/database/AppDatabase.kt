@@ -4,11 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import info.sergeikolinichenko.cryptorates.data.model.CryptoNameDto
 
 /** Created by Sergei Kolinichenko on 02.11.2022 at 17:04 (GMT+3) **/
 
-@Database(entities = [CryptoNameDto::class], version = 1, exportSchema = false)
+@Database(entities = [CryptoInfoDbModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase: RoomDatabase() {
 
     companion object {

@@ -1,7 +1,5 @@
-package info.sergeikolinichenko.cryptorates.data.model
+package info.sergeikolinichenko.cryptorates.data.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import info.sergeikolinichenko.cryptorates.data.network.ApiFactory.BASE_IMAGE_URL

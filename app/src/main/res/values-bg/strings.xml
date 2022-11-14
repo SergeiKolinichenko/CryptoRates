@@ -6,4 +6,5 @@
     <string name="max_price_label">Максимум на ден:</string>
     <string name="last_market_label">Последна сделка:</string>
     <string name="last_updated_label">Актуализирано:</string>
+    <string name="slash">/</string>
 </resources>
