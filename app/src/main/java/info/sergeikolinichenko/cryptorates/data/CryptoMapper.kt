@@ -1,10 +1,10 @@
-package info.sergeikolinichenko.cryptorates.data.database
+package info.sergeikolinichenko.cryptorates.data
 
-import android.util.Log
 import com.google.gson.Gson
-import info.sergeikolinichenko.cryptorates.data.models.CryptoInfoDto
-import info.sergeikolinichenko.cryptorates.data.models.CryptoInfoJsonContainerDto
-import info.sergeikolinichenko.cryptorates.data.models.CryptoNamesListDto
+import info.sergeikolinichenko.cryptorates.data.database.CryptoInfoDbModel
+import info.sergeikolinichenko.cryptorates.data.network.models.CryptoInfoDto
+import info.sergeikolinichenko.cryptorates.data.network.models.CryptoInfoJsonContainerDto
+import info.sergeikolinichenko.cryptorates.data.network.models.CryptoNamesListDto
 import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
 import java.sql.Timestamp
 import java.text.SimpleDateFormat

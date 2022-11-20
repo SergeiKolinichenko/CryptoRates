@@ -1,7 +1,7 @@
 package info.sergeikolinichenko.cryptorates.data.network
 
-import info.sergeikolinichenko.cryptorates.data.models.CryptoInfoJsonContainerDto
-import info.sergeikolinichenko.cryptorates.data.models.CryptoNamesListDto
+import info.sergeikolinichenko.cryptorates.data.network.models.CryptoInfoJsonContainerDto
+import info.sergeikolinichenko.cryptorates.data.network.models.CryptoNamesListDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 

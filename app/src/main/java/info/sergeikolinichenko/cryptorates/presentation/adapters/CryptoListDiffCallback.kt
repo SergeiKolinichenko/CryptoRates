@@ -1,7 +1,6 @@
 package info.sergeikolinichenko.cryptorates.presentation.adapters
 
 import androidx.recyclerview.widget.DiffUtil
-import info.sergeikolinichenko.cryptorates.data.models.CryptoNameDto
 import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
 
 /** Created by Sergei Kolinichenko on 02.11.2022 at 17:57 (GMT+3) **/

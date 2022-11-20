@@ -1,4 +1,4 @@
-package info.sergeikolinichenko.cryptorates.data.models
+package info.sergeikolinichenko.cryptorates.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

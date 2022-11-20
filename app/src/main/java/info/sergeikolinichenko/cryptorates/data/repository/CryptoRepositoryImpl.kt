@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import info.sergeikolinichenko.cryptorates.data.database.AppDatabase
-import info.sergeikolinichenko.cryptorates.data.database.CryptoMapper
+import info.sergeikolinichenko.cryptorates.data.CryptoMapper
 import info.sergeikolinichenko.cryptorates.data.network.ApiFactory
 import info.sergeikolinichenko.cryptorates.domain.CryptoRepository
 import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
@@ -47,7 +47,7 @@ class CryptoRepositoryImpl(application: Application): CryptoRepository {
                 Log.d("MyLog", "dbModelList $dbModelList")
                 cryptoInfoDao.insertPriceList(dbModelList)
             } catch (e: Exception) {
-                Log.d("MyLog", "Error loadCryptoData $e")
+                Log.ERROR
             }
             delay(RECEIVE_DELAY_JSON)
         }

@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
-import info.sergeikolinichenko.cryptorates.R
-import info.sergeikolinichenko.cryptorates.data.database.CryptoMapper.Companion.EMPTY_STRING
+import info.sergeikolinichenko.cryptorates.data.CryptoMapper.Companion.EMPTY_STRING
 import info.sergeikolinichenko.cryptorates.databinding.ActivityCryptoDetailBinding
-import info.sergeikolinichenko.cryptorates.databinding.ActivityCryptoPriceListBinding
 
 class CryptoDetailActivity : AppCompatActivity() {
 

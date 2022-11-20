@@ -1,9 +1,7 @@
-package info.sergeikolinichenko.cryptorates.data.models
+package info.sergeikolinichenko.cryptorates.data.network.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import info.sergeikolinichenko.cryptorates.data.network.ApiFactory.BASE_IMAGE_URL
-import info.sergeikolinichenko.cryptorates.utils.convertTimestampToTime
 
 /** Created by Sergei Kolinichenko on 14.10.2022 at 20:56 (GMT+3) **/
 
@@ -127,12 +125,4 @@ data class CryptoInfoDto(
     @SerializedName("IMAGEURL")
     @Expose
     val imageUrl: String?
-) {
-    fun getFormattedTime(): String {
-        return convertTimestampToTime(lastUpdate)
-    }
-
-    fun getFullImageUrl(): String {
-        return BASE_IMAGE_URL + imageUrl
-    }
-}
+)
