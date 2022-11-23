@@ -9,5 +9,5 @@ interface CryptoRepository {
 
     fun getCryptoInfoList(): LiveData<List<CryptoInfo>>
     fun getCryptoInfo(fromSymbol: String): LiveData<CryptoInfo>
-    suspend fun loadCryptoData()
+    fun loadCryptoData()
 }

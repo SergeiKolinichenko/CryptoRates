@@ -28,6 +28,7 @@ class CryptoPriceListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.rvPriceListCrypto.adapter = adapter
+        binding.rvPriceListCrypto.itemAnimator = null // no item animation
         viewModel.cryptoInfoList.observe(this) {
             adapter.submitList(it)
         }
