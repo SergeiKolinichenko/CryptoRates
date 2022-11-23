@@ -75,5 +75,5 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.43.2'
 
     // javax.annotation
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+//    implementation 'javax.annotation:javax.annotation-api:1.3.2'
 }

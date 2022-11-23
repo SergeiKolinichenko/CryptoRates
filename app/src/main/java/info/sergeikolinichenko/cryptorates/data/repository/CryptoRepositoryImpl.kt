@@ -8,18 +8,21 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import info.sergeikolinichenko.cryptorates.data.database.AppDatabase
 import info.sergeikolinichenko.cryptorates.data.CryptoMapper
+import info.sergeikolinichenko.cryptorates.data.database.CryptoInfoDao
 import info.sergeikolinichenko.cryptorates.data.network.ApiFactory
 import info.sergeikolinichenko.cryptorates.data.workers.RefreshDataWorker
 import info.sergeikolinichenko.cryptorates.domain.CryptoRepository
 import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
 import kotlinx.coroutines.delay
+import javax.inject.Inject
 
 /** Created by Sergei Kolinichenko on 02.11.2022 at 19:45 (GMT+3) **/
 
-class CryptoRepositoryImpl(private val application: Application): CryptoRepository {
-
-    private val cryptoInfoDao = AppDatabase.getInstance(application).cryptoInfoDao()
-    private val mapper = CryptoMapper()
+class CryptoRepositoryImpl @Inject constructor(
+    private val application: Application,
+    private val cryptoInfoDao: CryptoInfoDao,
+    private val mapper: CryptoMapper
+    ): CryptoRepository {
 
     override fun getCryptoInfoList(): LiveData<List<CryptoInfo>> {
         return Transformations.map(

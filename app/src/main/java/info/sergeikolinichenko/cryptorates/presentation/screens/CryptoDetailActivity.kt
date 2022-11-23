@@ -2,27 +2,35 @@ package info.sergeikolinichenko.cryptorates.presentation.screens
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
 import info.sergeikolinichenko.cryptorates.data.CryptoMapper.Companion.EMPTY_STRING
 import info.sergeikolinichenko.cryptorates.databinding.ActivityCryptoDetailBinding
+import info.sergeikolinichenko.cryptorates.di.CryptoApplication
+import javax.inject.Inject
 
 class CryptoDetailActivity : AppCompatActivity() {
 
-    private val viewModelFactory by lazy { CryptoInfoViewModelFactory(application) }
+    private val binding by lazy {
+        ActivityCryptoDetailBinding.inflate(layoutInflater)
+    }
+
+    @Inject
+    lateinit var viewModelFactory: CryptoInfoViewModelFactory
     private val viewModel by lazy {
         ViewModelProvider(this, viewModelFactory)[CryptoInfoViewModel::class.java]
     }
 
-    private var _binding: ActivityCryptoDetailBinding? = null
-    private val binding: ActivityCryptoDetailBinding
-        get() = _binding ?: throw RuntimeException("ActivityCryptoDetailBinding equals null")
+    private val component by lazy {
+        (application as CryptoApplication).component
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
-        _binding = ActivityCryptoDetailBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         val fromSymbol: String
@@ -50,11 +58,6 @@ class CryptoDetailActivity : AppCompatActivity() {
 
     private fun parseExtra(intent: Intent): Boolean {
         return intent.hasExtra(EXTRA_FROM_SYMBOL)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 
     companion object {

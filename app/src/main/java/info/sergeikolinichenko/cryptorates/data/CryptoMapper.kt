@@ -9,10 +9,11 @@ import info.sergeikolinichenko.cryptorates.domain.model.CryptoInfo
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 /** Created by Sergei Kolinichenko on 02.11.2022 at 20:30 (GMT+3) **/
 
-class CryptoMapper {
+class CryptoMapper @Inject constructor() {
 
     fun mapDtoToDbModel(dto: CryptoInfoDto) = CryptoInfoDbModel(
         fromSymbol = dto.fromSymbol,
