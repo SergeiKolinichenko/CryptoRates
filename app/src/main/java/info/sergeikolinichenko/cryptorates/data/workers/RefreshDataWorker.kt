@@ -1,6 +1,5 @@
 package info.sergeikolinichenko.cryptorates.data.workers
 
-import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
@@ -8,8 +7,8 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkerParameters
 import info.sergeikolinichenko.cryptorates.data.CryptoMapper
-import info.sergeikolinichenko.cryptorates.data.database.AppDatabase
-import info.sergeikolinichenko.cryptorates.data.network.ApiFactory
+import info.sergeikolinichenko.cryptorates.data.database.CryptoInfoDao
+import info.sergeikolinichenko.cryptorates.data.network.ApiService
 import info.sergeikolinichenko.cryptorates.data.repository.CryptoRepositoryImpl
 import kotlinx.coroutines.delay
 
@@ -17,17 +16,17 @@ import kotlinx.coroutines.delay
 
 class RefreshDataWorker(
     context: Context,
-    workerParameters: WorkerParameters
-): CoroutineWorker(context, workerParameters) {
-
-    private val cryptoInfoDao = AppDatabase.getInstance(context).cryptoInfoDao()
-    private val apiService = ApiFactory.apiService
-    private val mapper = CryptoMapper()
+    workerParameters: WorkerParameters,
+    private val cryptoInfoDao: CryptoInfoDao,
+    private val apiService: ApiService,
+    private val mapper: CryptoMapper
+) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result {
         while (true) {
             try {
-                val topCoins = apiService.getTopCryptoInfo(limit = CryptoRepositoryImpl.LIMIT_TOP_COINS)
+                val topCoins =
+                    apiService.getTopCryptoInfo(limit = CryptoRepositoryImpl.LIMIT_TOP_COINS)
                 val fSyms = mapper.mapNamesListToString(topCoins)
                 val jsonContainer = apiService.getFullPriceList(fSyms = fSyms)
                 val coinInfoDtoList = mapper.mapJsonContainerToListCryptoInfo(jsonContainer)
