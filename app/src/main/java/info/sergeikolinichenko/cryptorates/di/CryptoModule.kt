@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import info.sergeikolinichenko.cryptorates.data.database.AppDatabase
 import info.sergeikolinichenko.cryptorates.data.database.CryptoInfoDao
+import info.sergeikolinichenko.cryptorates.data.network.ApiFactory
+import info.sergeikolinichenko.cryptorates.data.network.ApiService
 import info.sergeikolinichenko.cryptorates.data.repository.CryptoRepositoryImpl
 import info.sergeikolinichenko.cryptorates.domain.CryptoRepository
 
@@ -15,13 +17,21 @@ import info.sergeikolinichenko.cryptorates.domain.CryptoRepository
 interface CryptoModule {
 
     @Binds
+    @ApplicationScope
     fun bindCryptoRepository(impl: CryptoRepositoryImpl): CryptoRepository
 
     companion object{
 
         @Provides
+        @ApplicationScope
         fun provideCryptoInfoDao( application: Application ): CryptoInfoDao {
             return AppDatabase.getInstance(application).cryptoInfoDao()
+        }
+
+        @Provides
+        @ApplicationScope
+        fun provideApiService(): ApiService {
+            return ApiFactory.apiService
         }
     }
 }

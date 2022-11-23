@@ -7,10 +7,11 @@ import androidx.work.WorkerParameters
 import info.sergeikolinichenko.cryptorates.data.CryptoMapper
 import info.sergeikolinichenko.cryptorates.data.database.CryptoInfoDao
 import info.sergeikolinichenko.cryptorates.data.network.ApiService
+import javax.inject.Inject
 
 /** Created by Sergei Kolinichenko on 23.11.2022 at 20:52 (GMT+3) **/
 
-class RefreshDataWorkerFactory(
+class RefreshDataWorkerFactory @Inject constructor(
     private val cryptoInfoDao: CryptoInfoDao,
     private val apiService: ApiService,
     private val mapper: CryptoMapper
@@ -20,7 +21,7 @@ class RefreshDataWorkerFactory(
         appContext: Context,
         workerClassName: String,
         workerParameters: WorkerParameters
-    ): ListenableWorker? {
+    ): ListenableWorker {
         return RefreshDataWorker(
             appContext,
             workerParameters,
