@@ -12,7 +12,7 @@ import javax.inject.Provider
 
 class CryptoInfoViewModelFactory @Inject constructor(
     private val viewModelProviders:
-    @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
+        @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
 ) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

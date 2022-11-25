@@ -2,7 +2,7 @@ package info.sergeikolinichenko.cryptorates.di
 
 import android.app.Application
 import androidx.work.Configuration
-import info.sergeikolinichenko.cryptorates.data.workers.RefreshDataWorkerFactory
+import info.sergeikolinichenko.cryptorates.data.workers.CryptoWorkerFactory
 import javax.inject.Inject
 
 /** Created by Sergei Kolinichenko on 23.11.2022 at 20:00 (GMT+3) **/
@@ -10,7 +10,7 @@ import javax.inject.Inject
 class CryptoApplication : Application(), Configuration.Provider {
 
     @Inject
-    lateinit var workerFactory: RefreshDataWorkerFactory
+    lateinit var workerFactory: CryptoWorkerFactory
 
     val component by lazy {
         DaggerApplicationComponent.factory().create(this)
